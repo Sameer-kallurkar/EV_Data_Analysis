@@ -37,9 +37,16 @@ df['FastCharge_km/h'] = pd.to_numeric(df['FastCharge_km/h'], errors='coerce')
 df['FastCharge_km/h'].fillna(df['FastCharge_km/h'].mean(), inplace=True)
 df['FastCharge_km/h'] = df['FastCharge_km/h'].round().astype(int)
 
+# Display summary statistics for numerical columns
+print(df.describe())
+
+# Display frequency counts for categorical columns
+print(df['Brand'].value_counts())
+print(df['RapidCharge'].value_counts())
+print(df['PowerTrain'].value_counts())
+
 # Plotting multiple graphs in a single figure
 fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(20, 18))
-
 
 # Top 10 Brands with the Most Number of Electric Cars
 brand_counts = df['Brand'].value_counts().head(10)
@@ -82,9 +89,6 @@ axes[2, 0].set_xlabel('Acceleration (seconds)')
 axes[2, 0].set_ylabel('Frequency')
 axes[2, 0].grid(True)
 
-# Adjust layout to prevent overlapping labels
-plt.tight_layout(pad=3.0)
-
 # Histogram for top speed
 axes[2, 1].hist(df['TopSpeed_km/h'], bins=20, color='skyblue', edgecolor='black')
 axes[2, 1].set_title('Distribution of Top Speed of Electric Vehicles')
@@ -92,5 +96,7 @@ axes[2, 1].set_xlabel('Top Speed (km/h)')
 axes[2, 1].set_ylabel('Frequency')
 axes[2, 1].grid(True)
 
-plt.tight_layout()
+# Adjust layout to prevent overlapping labels
+plt.tight_layout(pad=3.0)
+
 plt.show()
